@@ -15,10 +15,10 @@ os.environ["PLAYWRIGHT_BROWSERS_PATH"] = playwright_dir
 
 @st.cache_resource
 def install_playwright():
-    # Buscamos si el ejecutable de Chromium ya está presente
-    chrome_executable = os.path.join(playwright_dir, "chromium-1117", "chrome-linux", "chrome")
-    if not os.path.exists(chrome_executable):
-        os.system("python -m playwright install chromium")
+    # Ejecuta la instalación general de playwright en la nube
+    os.system("python -m playwright install --with-deps chromium")
+
+install_playwright()
 
 install_playwright()
 
