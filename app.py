@@ -12,7 +12,7 @@ st.set_page_config(page_title="Buscador de Clientes Potenciales", page_icon="�
 # 2. Luego sí definimos y ejecutamos la instalación
 @st.cache_resource
 def install_playwright():
-    os.system("playwright install chromium")
+    os.system("python -m playwright install chromium")
 
 install_playwright()
 
