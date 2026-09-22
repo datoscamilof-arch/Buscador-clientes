@@ -2,20 +2,22 @@
 Interfaz web sencilla para buscar clientes potenciales (pymes) en Google Maps.
 Para correrla:  streamlit run app.py
 """
+
 import streamlit as st
 import pandas as pd
 import os
 
 st.set_page_config(page_title="Buscador de Clientes Potenciales", page_icon="🔎", layout="wide")
 
-# Forzar a Playwright a usar una carpeta local del proyecto para los navegadores
+# Forzar a Playwright a usar una carpeta local del proyecto
 playwright_dir = os.path.join(os.getcwd(), ".ms-playwright")
 os.environ["PLAYWRIGHT_BROWSERS_PATH"] = playwright_dir
 
 @st.cache_resource
 def install_playwright():
-    # Instala Chromium solo si la carpeta local no existe todavía
-    if not os.path.exists(playwright_dir):
+    # Buscamos si el ejecutable de Chromium ya está presente
+    chrome_executable = os.path.join(playwright_dir, "chromium-1117", "chrome-linux", "chrome")
+    if not os.path.exists(chrome_executable):
         os.system("python -m playwright install chromium")
 
 install_playwright()
@@ -27,7 +29,6 @@ st.caption(
     "Busca pymes en Google Maps y filtra los mejores prospectos para ofrecerles "
     "tus servicios de análisis de datos."
 )
-
 with st.form("busqueda_form"):
     col1, col2 = st.columns(2)
     with col1:
