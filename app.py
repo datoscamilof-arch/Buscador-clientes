@@ -6,7 +6,10 @@ import streamlit as st
 import pandas as pd
 import os
 
-# Instalar Chromium automáticamente en la nube
+# 1. La configuración de la página SIEMPRE debe ir primero
+st.set_page_config(page_title="Buscador de Clientes Potenciales", page_icon="🔎", layout="wide")
+
+# 2. Luego sí definimos y ejecutamos la instalación
 @st.cache_resource
 def install_playwright():
     os.system("playwright install chromium")
@@ -14,8 +17,6 @@ def install_playwright():
 install_playwright()
 
 from scraper import scrape_places
-
-st.set_page_config(page_title="Buscador de Clientes Potenciales", page_icon="🔎", layout="wide")
 
 st.title("🔎 Buscador de Clientes Potenciales")
 st.caption(
