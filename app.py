@@ -6,13 +6,17 @@ import streamlit as st
 import pandas as pd
 import os
 
-# 1. La configuración de la página SIEMPRE debe ir primero
 st.set_page_config(page_title="Buscador de Clientes Potenciales", page_icon="🔎", layout="wide")
 
-# 2. Luego sí definimos y ejecutamos la instalación
+# Forzar a Playwright a usar una carpeta local del proyecto para los navegadores
+playwright_dir = os.path.join(os.getcwd(), ".ms-playwright")
+os.environ["PLAYWRIGHT_BROWSERS_PATH"] = playwright_dir
+
 @st.cache_resource
 def install_playwright():
-    os.system("python -m playwright install chromium")
+    # Instala Chromium solo si la carpeta local no existe todavía
+    if not os.path.exists(playwright_dir):
+        os.system("python -m playwright install chromium")
 
 install_playwright()
 
