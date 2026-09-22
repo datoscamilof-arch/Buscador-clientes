@@ -15,12 +15,12 @@ os.environ["PLAYWRIGHT_BROWSERS_PATH"] = playwright_dir
 
 @st.cache_resource
 def install_playwright():
-    # Ejecuta la instalación general de playwright en la nube
-    os.system("python -m playwright install --with-deps chromium")
+    # Usamos la ruta directa del ejecutable de python del entorno virtual actual
+    import sys
+    import subprocess
+    subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], check=True)
 
-install_playwright()
-
-install_playwright()
+install_prev = install_playwright()
 
 from scraper import scrape_places
 
